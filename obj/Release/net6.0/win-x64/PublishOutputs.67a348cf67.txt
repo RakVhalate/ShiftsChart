@@ -1,0 +1,2 @@
+/home/rak/Pogromizm/CSharp/Grafik.pdb
+/home/rak/Pogromizm/CSharp/Grafik.exe

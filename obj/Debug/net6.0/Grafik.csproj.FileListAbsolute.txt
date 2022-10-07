@@ -1,0 +1,15 @@
+/home/rak/Pogromizm/CSharp/Grafik/bin/Debug/net6.0/Grafik
+/home/rak/Pogromizm/CSharp/Grafik/bin/Debug/net6.0/Grafik.deps.json
+/home/rak/Pogromizm/CSharp/Grafik/bin/Debug/net6.0/Grafik.runtimeconfig.json
+/home/rak/Pogromizm/CSharp/Grafik/bin/Debug/net6.0/Grafik.dll
+/home/rak/Pogromizm/CSharp/Grafik/bin/Debug/net6.0/Grafik.pdb
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.csproj.AssemblyReference.cache
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.GeneratedMSBuildEditorConfig.editorconfig
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.AssemblyInfoInputs.cache
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.AssemblyInfo.cs
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.csproj.CoreCompileInputs.cache
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.dll
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/refint/Grafik.dll
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.pdb
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/Grafik.genruntimeconfig.cache
+/home/rak/Pogromizm/CSharp/Grafik/obj/Debug/net6.0/ref/Grafik.dll
