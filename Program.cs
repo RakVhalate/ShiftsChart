@@ -26,7 +26,7 @@ class Chart
     {
         int rows = chart.GetUpperBound(0) + 1;
         int columns = chart.Length / rows;
-        for(int j = 1; j < rows; j++) //ставим везде нули для начала работ~ы с таблицей
+        for(int j = 1; j < rows; j++) //ставим везде нули для начала работы с таблицей
         {
             for(int i = 1; i < columns; i++)
             {
@@ -111,8 +111,9 @@ class Chart
         int nowDay = DateTime.Now.Day;
         DrawArray(Shifts(CreateWorkersList(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - nowDay)));
         DrawArray(PutShifts(IsAbsent(Shifts(CreateWorkersList(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - nowDay)))));
+        Console.WriteLine("Нажмите любую клавишу для выхода")
         Console.ReadLine();
-        
+        //тестовая строка
         }
     }
 }
