@@ -34,30 +34,58 @@ class Chart
             }
         }
         return chart;
+        
     }
+
+    public static int AbsentCalculate(int[,] absDays) //метод должен принимать в себя две даты
+    { 
+        //absDays[даты, месяцы]
+        if(DateTime.Now.Month <= absDays[1,1] )
+            {
+                int vacDays = absDays[0,1] - absDays[0,0] + 1;
+                //Console.WriteLine("Он отдыхает в этом месяце " + vacDays + " дней.");
+                return vacDays;
+            }
+
+        if (DateTime.Now.Month > absDays[1,1]) //сравниваем, больше ли текущий месяц чем месяц окончания отпуска
+            {
+                int vacDays = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - absDays[0,0];
+               // Console.WriteLine("Он отдыхает в этом месяце " + vacDays + " дней.");
+                return vacDays;
+            }
+        return 0;
+    
+    
+    
+    } //метод должен отдавать число дней отдыха дежуранта в этом месяце
+
     public static string[,] IsAbsent(string[,] toPrint)
     {
-        Console.WriteLine("В случае отсутствия человека введите его имя, затем через пробел число, с которого он отсутствует, затем по какое число он отсутствует");
+        Console.WriteLine("В случае отсутствия человека введите его имя, затем через пробел число, с которого он отсутствует, затем по какое число он отсутствует. Формат чисел ЧЧ.ММ." + "\n" + "Иначе введите N для продолжения работы программы");
         string inp = Console.ReadLine();
-        while(inp != "N")
+        while(inp != "N" && inp != null)
             { 
             string[] input = inp.Split(' ');
+            string[] firstDate = input[1].Split('.');
+            string[] secondDate = input[2].Split('.');
+            int[,] absDays = new int[2,2] { { int.Parse(firstDate[0]), int.Parse(secondDate[0]) }, { int.Parse(firstDate[1]), int.Parse(secondDate[1]) } };
             int rows = toPrint.GetUpperBound(0) + 1;
             int columns = toPrint.Length / rows;
-            int abs = 0;
+            int abs = 0; //порядковый номер отсутствующего в массиве
             bool isFound = false;
+           
             for(int i = 1; i < rows; i++)
             {
                 if(toPrint[i,0] == input[0])
                 {
-                    Console.WriteLine("Дежурный " + toPrint[i,0] + " будет отсутствовать с " + input[1] + " числа по " + input[2] + " число. Приятного отдыха!"); //ищем порядковый номер отсутствующего
+                    Console.WriteLine("Дежурный " + toPrint[i,0] + " будет отсутствовать с " + absDays[0,0] + '.' + absDays[1,0] + " по " + absDays[0,1] + '.' + absDays[1,1] + "\n" + "Длительность отпуска " + AbsentCalculate(absDays) + " дней."); //ищем порядковый номер отсутствующего
                     abs = i;
                     isFound = true;
                 }
             }
             if(isFound == true)
                 { 
-                for(int j = int.Parse(input[1]) - (DateTime.Now.Day - 1); j <  int.Parse(input[2]) - (DateTime.Now.Day - 2) ; j++)
+                for(int j = absDays[0,0] - (DateTime.Now.Day - 1); j < absDays[0,0] - (DateTime.Now.Day-1) + AbsentCalculate(absDays); j++) //проставляем Н-ки в зависимости от условий отпуска
                         {
                             toPrint[abs,j] = "Н ";
                         }
@@ -79,8 +107,9 @@ class Chart
         {
             for (int n = 1; n < rows & d <columns; n++)
             {
-                if (toShifts[n,d] == "Н ") n++;
+                if (toShifts[n,d] == "Н " && n < rows) n++;
                 if (n == rows) n = 1;
+                if (toShifts[n,d] == "Н " && n < rows) n++;
                 toShifts[n,d] = "Д ";
                 d++;
             }
