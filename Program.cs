@@ -37,24 +37,36 @@ class Chart
     }
     public static string[,] IsAbsent(string[,] toPrint)
     {
-        Console.WriteLine("В случае отсутствия человека введите его имя, затем через пробел число, с которого он отсутствует, затем на сколько дней он отсутствует");
+        Console.WriteLine("В случае отсутствия человека введите его имя, затем через пробел число, с которого он отсутствует, затем по какое число он отсутствует");
         string inp = Console.ReadLine();
-        string[] input = inp.Split(' ');
-        int rows = toPrint.GetUpperBound(0) + 1;
-        int columns = toPrint.Length / rows;
-        int abs = 0;
-        for(int i = 1; i < rows; i++)
-        {
-            if(toPrint[i,0] == input[0])
+        while(inp != "N")
+            { 
+            string[] input = inp.Split(' ');
+            int rows = toPrint.GetUpperBound(0) + 1;
+            int columns = toPrint.Length / rows;
+            int abs = 0;
+            bool isFound = false;
+            for(int i = 1; i < rows; i++)
             {
-                Console.WriteLine("Дежурный " + toPrint[i,0] + " будет отсутствовать с " + input[1] + " числа " + input[2] + " дней. Прогульщик!"); //ищем порядковый номер отсутствующего
-                abs = i;
-            }
-        }
-        for(int j = int.Parse(input[1]) - (DateTime.Now.Day - 1); j < int.Parse(input[1]) - (DateTime.Now.Day - 1) + int.Parse(input[2]); j++)
+                if(toPrint[i,0] == input[0])
                 {
-                    toPrint[abs,j] = "Н ";
+                    Console.WriteLine("Дежурный " + toPrint[i,0] + " будет отсутствовать с " + input[1] + " числа по " + input[2] + " число. Приятного отдыха!"); //ищем порядковый номер отсутствующего
+                    abs = i;
+                    isFound = true;
                 }
+            }
+            if(isFound == true)
+                { 
+                for(int j = int.Parse(input[1]) - (DateTime.Now.Day - 1); j <  int.Parse(input[2]) - (DateTime.Now.Day - 2) ; j++)
+                        {
+                            toPrint[abs,j] = "Н ";
+                        }
+                }
+            else Console.WriteLine("Такой дежурант не найден, проверьте ввод");
+
+            Console.WriteLine("Введите следующего отсутствующего человека по шаблону либо введите символ N(Next) для построения графика");
+            inp = Console.ReadLine();
+            }
         return toPrint;
         
     }
@@ -63,13 +75,14 @@ class Chart
         int rows = toShifts.GetUpperBound(0) + 1;
         int columns = toShifts.Length / rows;
 
-      for(int j = 1; j < columns ;) //ставим дни дежурств
+      for(int d = 1; d < columns ;) //ставим дни дежурств
         {
-            for (int i = 1; i <rows & j <columns; i++)
+            for (int n = 1; n < rows & d <columns; n++)
             {
-                if (toShifts[i,j] == "Н ") i++;
-                toShifts[i,j] = "Д ";
-                j++;
+                if (toShifts[n,d] == "Н ") n++;
+                if (n == rows) n = 1;
+                toShifts[n,d] = "Д ";
+                d++;
             }
       
         }
@@ -111,7 +124,7 @@ class Chart
         int nowDay = DateTime.Now.Day;
         DrawArray(Shifts(CreateWorkersList(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - nowDay)));
         DrawArray(PutShifts(IsAbsent(Shifts(CreateWorkersList(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - nowDay)))));
-        Console.WriteLine("Нажмите любую клавишу для выхода")
+        Console.WriteLine("Нажмите любую клавишу для выхода");
         Console.ReadLine();
         //тестовая строка
         }
